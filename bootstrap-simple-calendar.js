@@ -191,7 +191,7 @@
             $(o).change(function () {
                 var theValue = $(this).val();
                 if (isNaN(Date.parse(theValue))) {
-                    throw new Error('Invalid date format.');
+                    nCal.find('.dropdown-menu').empty().append(renderCalendar());
                     return;
                 }
 
