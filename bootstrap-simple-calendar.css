@@ -1,59 +1,50 @@
-.simple-calendar a{
+.simple-calendar a {
     text-decoration: none;
     color: #666666;
     padding: 6px;
     display: block;
 }
-
-.simple-calendar .dropdown-menu .table > thead > tr > th,
-.simple-calendar .table > tbody > tr > th,
-.simple-calendar .table > tfoot > tr > th,
-.simple-calendar .table > thead > tr > td,
-.simple-calendar .table > tbody > tr > td,
-.simple-calendar .table > tfoot > tr > td{
+.simple-calendar .dropdown-menu .table > thead > tr > th, .simple-calendar .table > tbody > tr > th, .simple-calendar .table > tfoot > tr > th, .simple-calendar .table > thead > tr > td, .simple-calendar .table > tbody > tr > td, .simple-calendar .table > tfoot > tr > td {
     line-height: 1;
     padding: 0px;
 }
-
-.simple-calendar .dropdown-menu .table{
+.simple-calendar .dropdown-menu .table {
     margin: -1px;
 }
-.simple-calendar .dropdown-menu{
+.simple-calendar .dropdown-menu {
     overflow: hidden;
 }
-
-.simple-calendar .dropdown-menu .with-meal a{
+.simple-calendar .dropdown-menu .with-meal a {
     color: #669933;
 }
-
-.simple-calendar .dropdown-menu .highlight{
+.simple-calendar .dropdown-menu .highlight {
     background: #fffccc;
 }
-
-.simple-calendar > button{
+.simple-calendar > button {
     position: relative;
     min-width: 210px;
 }
-
-.simple-calendar >button .selected-text{
+.simple-calendar >button .selected-text {
     float: left;
-    margin-left: 12px;
 }
-
-.simple-calendar > button .caret{
+.simple-calendar > button .caret {
     margin-top: 8px;
     position: absolute;
     right: 12px;
 }
-.simple-calendar .calendar-header-day{
+.simple-calendar .calendar-header-day {
     padding: 6px!important;
 }
-
-.simple-calendar .table a.today{
+.simple-calendar .table a.today {
     background: #fffccc;
 }
-
-.simple-calendar .table a.selected{
+.simple-calendar .table a.selected {
     background: #357ebd;
     color: #FFFFFF;
+}
+.simple-calendar .simple-calendar-month,
+.simple-calendar .simple-calendar-year {
+    width: 70px;
+    padding: 0px;
+    height: 22px;
 }
