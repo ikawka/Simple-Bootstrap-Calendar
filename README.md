@@ -14,9 +14,12 @@ Example:
 
 ```javascript
 $("#myCalendar").simpleCalendar({
-    bsBtnClass: 'btn-warning',  //bootstap button styles
+    bsBtnClass: 'btn-warning',   //bootstap button styles
     defaultText: 'Select Date',
-    dateFormat: 'MMM dd, yyyy' //using $.format plugin
+    dateFormat: 'MMM dd, yyyy',  //using $.format plugin
+    changeMonth: true,           //set month to select mode
+    changeYear: true,            //set year to select mode
+    yearRange: '1950:2000'       // limit the year range
 });
 ```
 
