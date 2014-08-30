@@ -22,5 +22,8 @@ $("#myCalendar").simpleCalendar({
     yearRange: '1950:2000'       // limit the year range
 });
 ```
-
+To set initial value
+```javascript
+$("#myCalendar").val("2014-08-28").change();
+```
 [See in Action](http://jsfiddle.net/bulletproofscripts/08r7m1hL/embedded/result/)
