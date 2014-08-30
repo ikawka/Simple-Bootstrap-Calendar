@@ -1,6 +1,7 @@
 (function ($) {
     var cal_days_labels = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     var cal_months_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var cal_months_labels_ = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
     var cal_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
     // this is the current date
@@ -8,13 +9,52 @@
     var today = new Date();
     var nCal = null;
     var theSelectedDate = '';
-
+    var settings;
+    
+    function setYear(year){
+        if(settings.changeYear !== false){
+            var yearOption = '<select class="simple-calendar-year form-control pull-right">';
+            var thisyear   = cal_current_date.getFullYear();
+            var range = [];
+            if(settings.yearRange != false){
+                range = settings.yearRange.split(':');
+            }else{
+                range[0] = thisyear - 10;
+                range[1] = thisyear + 10;
+            }
+            
+            for(var y = range[0]; y<= range[1]; y++){
+                yearOption += '<option value="'+y+'" '+
+                              ((y==year)?'selected':'')+
+                              '>'+y+'</option>';
+            }
+            yearOption += '</select>';
+            return yearOption;
+        }
+        return year;
+    }
+    
+    function setMonthName(selected){
+        if(settings.changeMonth !== false){
+            var monthOption = '<select class="simple-calendar-month form-control">';
+            for(var e=0; e<cal_months_labels_.length; e++){
+                monthOption += '<option value="'+e+'" '+
+                    ((e == selected) ? 'selected':'')+
+                    '>'+cal_months_labels_[e]+'</option>';
+            }
+            monthOption += '</select>';
+            return monthOption;
+        }
+        
+        return cal_months_labels[selected];
+    }
+    
     function Calendar(month, year) {
         this.month = (isNaN(month) || month == null) ? cal_current_date.getMonth() : month;
         this.year = (isNaN(year) || year == null) ? cal_current_date.getFullYear() : year;
         this.html = '';
     }
-
+    
     Calendar.prototype.generateHTML = function () {
         // get first day of month
         var firstDay = new Date(this.year, this.month, 1);
@@ -28,10 +68,12 @@
             }
         }
 
-        var monthName = cal_months_labels[this.month]
+        var monthName = setMonthName(this.month);
+        var theYear   = setYear(this.year);
+        
         var html = '<table class="table table-condense table-striped table-bordered">'+
-                   '<tr><th><a class="simple-calendar-move btn-prev glyphicon glyphicon-chevron-left" href="javascript:;"></a></th><th colspan="5" style="text-align:center; padding: 8px;">'+
-                   monthName + "&nbsp;" + this.year+
+            '<tr><th><a class="simple-calendar-move btn-prev glyphicon glyphicon-chevron-left" href="javascript:;"></a></th><th colspan="5" style="text-align:center; padding: '+((settings.changeMonth !== false) ? '2':'8')+'px;">'+
+                    theYear+ "" + monthName+
                    '</th><th><a class="simple-calendar-move btn-next glyphicon glyphicon-chevron-right" href="javascript:;"></a></th></tr>'+
                    '<tr class="calendar-header">';
         for (var i = 0; i <= 6; i++) {
@@ -104,6 +146,12 @@
         cal_current_date.setMonth(currMonth);
         nCal.find('.dropdown-menu').empty().append(renderCalendar());
     }
+    
+    function jumpTo(month, year){
+        cal_current_date.setFullYear(year);
+        cal_current_date.setMonth(month);
+        nCal.find('.dropdown-menu').empty().append(renderCalendar());
+    }
 
     function renderCalendar() {
         var thisMonth = cal_current_date.getMonth();
@@ -119,6 +167,16 @@
         calendar.find('a.btn-prev').click(function () {
             movePrev();
         });
+        
+        calendar.find('select.simple-calendar-month').change(function(){
+            var month = $(this).val();
+            var year  = calendar.find('select.simple-calendar-year').val();
+            jumpTo(month, year);
+        });
+        
+        calendar.find('select.simple-calendar-year').change(function(){
+            calendar.find('select.simple-calendar-month').change();
+        });
         return calendar;
     }
 
@@ -131,9 +189,14 @@
         var defaults = {
             bsBtnClass: 'btn-default',
             defaultText: 'Select Date',
-            dateFormat: 'YYYY-MM-dd'
+            dateFormat: 'YYYY-MM-dd',
+            maxDate: 0,
+            yearRange: false,
+            changeMonth: false,
+            changeYear: false
         };
-        var settings = $.extend({}, defaults, options);
+        
+        settings = $.extend({}, defaults, options);
         //unset the time
         cal_current_date.setHours(0);
         cal_current_date.setMinutes(0);
@@ -160,8 +223,9 @@
                 },
                     "click": function (e) {
                     var target = $(e.target);
+                        console.log(target)
                     this.closable = true;
-                    if (target.hasClass('simple-calendar-move')) {
+                    if (target.hasClass('simple-calendar-move') || target.is('select') || target.is('option')) {
                         this.closable = false;
                     } else if (target.hasClass('day-item')) {
                         var theDate = theSelectedDate = target.attr('data-date');
@@ -190,6 +254,7 @@
 
             $(o).change(function () {
                 var theValue = $(this).val();
+                
                 if (isNaN(Date.parse(theValue))) {
                     nCal.find('.dropdown-menu').empty().append(renderCalendar());
                     return;
