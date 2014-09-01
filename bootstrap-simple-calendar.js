@@ -13,7 +13,7 @@
     
     function setYear(year){
         if(settings.changeYear !== false){
-            var yearOption = '<select class="simple-calendar-year form-control pull-right">';
+            var yearOption = '<select class="simple-calendar-year form-control">';
             var thisyear   = cal_current_date.getFullYear();
             var range = [];
             if(settings.yearRange != false){
@@ -29,9 +29,9 @@
                               '>'+y+'</option>';
             }
             yearOption += '</select>';
-            return yearOption;
+            return '<div style="width: 50%; text-align: left" class="pull-right">'+yearOption+'</div>';
         }
-        return year;
+        return '<div style="width: 50%; text-align: center; line-height: 22px" class="pull-right">'+year+'</div>';
     }
     
     function setMonthName(selected){
@@ -43,10 +43,10 @@
                     '>'+cal_months_labels_[e]+'</option>';
             }
             monthOption += '</select>';
-            return monthOption;
+            return '<div style="width: 50%; text-align: right">'+monthOption+'</div>';
         }
         
-        return cal_months_labels[selected];
+        return '<div style="width: 50%; text-align: center; line-height: 22px;">'+cal_months_labels[selected]+'</div>';
     }
     
     function Calendar(month, year) {
