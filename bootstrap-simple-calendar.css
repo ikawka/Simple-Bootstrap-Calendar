@@ -44,7 +44,7 @@
 }
 .simple-calendar .simple-calendar-month,
 .simple-calendar .simple-calendar-year {
-    width: 70px;
+    width: 100%;
     padding: 0px;
     height: 22px;
 }
