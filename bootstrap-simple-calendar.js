@@ -29,9 +29,9 @@
                               '>'+y+'</option>';
             }
             yearOption += '</select>';
-            return '<div style="width: 50%; text-align: left" class="pull-right">'+yearOption+'</div>';
+            return '<div style="width: 40%; text-align: left" class="pull-right">'+yearOption+'</div>';
         }
-        return '<div style="width: 50%; text-align: center; line-height: 22px" class="pull-right">'+year+'</div>';
+        return '<div style="width: 40%; text-align: center; line-height: 22px" class="pull-right">'+year+'</div>';
     }
     
     function setMonthName(selected){
@@ -43,10 +43,10 @@
                     '>'+cal_months_labels_[e]+'</option>';
             }
             monthOption += '</select>';
-            return '<div style="width: 50%; text-align: right">'+monthOption+'</div>';
+            return '<div style="width: 60%; text-align: right">'+monthOption+'</div>';
         }
         
-        return '<div style="width: 50%; text-align: center; line-height: 22px;">'+cal_months_labels[selected]+'</div>';
+        return '<div style="width: 60%; text-align: center; line-height: 22px;">'+cal_months_labels[selected]+'</div>';
     }
     
     function Calendar(month, year) {
@@ -72,7 +72,7 @@
         var theYear   = setYear(this.year);
         
         var html = '<table class="table table-condense table-striped table-bordered">'+
-            '<tr><th><a class="simple-calendar-move btn-prev glyphicon glyphicon-chevron-left" href="javascript:;"></a></th><th colspan="5" style="text-align:center; padding: '+((settings.changeMonth !== false) ? '2':'8')+'px;">'+
+            '<tr><th><a class="simple-calendar-move btn-prev glyphicon glyphicon-chevron-left" href="javascript:;"></a></th><th colspan="5" style="text-align:center; padding: '+((settings.changeMonth !== false) ? '2':'4')+'px;">'+
                     theYear+ "" + monthName+
                    '</th><th><a class="simple-calendar-move btn-next glyphicon glyphicon-chevron-right" href="javascript:;"></a></th></tr>'+
                    '<tr class="calendar-header">';
