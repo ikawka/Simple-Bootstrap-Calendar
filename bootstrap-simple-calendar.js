@@ -1,3 +1,16 @@
+/*
+Simple Bootstrap Calendar
+Version 0.1.0
+https://github.com/ikawka/Simple-Bootstrap-Calendar
+by ikawka August 2014
+http://bulletproofscript.wordpress.com/
+
+Sources/References
+Basic Calendar
+http://jszen.blogspot.com/2007/03/how-to-build-simple-calendar-with.html
+Prevent Bootstrap dropdown from closing
+http://stackoverflow.com/a/19797577
+*/
 (function ($) {
     var cal_days_labels = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     var cal_months_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
