@@ -43,7 +43,8 @@
     color: #FFFFFF;
 }
 .simple-calendar .simple-calendar-month,
-.simple-calendar .simple-calendar-year {
+.simple-calendar .simple-calendar-year,
+.simple-calendar .simple-calendar-time {
     width: 100%;
     padding: 0px;
     height: 22px;
