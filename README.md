@@ -3,10 +3,11 @@ Simple-Bootstrap-Calendar
 
 A very simple Bootstrap Calendar utilizing the dropdown menu. You can also use [$.format](https://github.com/phstc/jquery-dateFormat) to format the date output.
 
-10-01-2014
-Added the auto position calculator using [PositionCalculator](https://github.com/tlindig/position-calculator) to be able to position the menu on top if the element is at the bottom of the page.
+10-01-2014:
 
-Added Time Selector.
+    Added the auto position calculator using [PositionCalculator](https://github.com/tlindig/position-calculator) to be able to position the menu on top if the element is at the bottom of the page.
+
+    Added Time Selector.
 
 Example:
 
