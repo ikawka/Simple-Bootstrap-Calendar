@@ -5,9 +5,9 @@ A very simple Bootstrap Calendar utilizing the dropdown menu. You can also use [
 
 10-01-2014:
 
-    Added the auto position calculator using [PositionCalculator](https://github.com/tlindig/position-calculator) to be able to position the menu on top if the element is at the bottom of the page.
+-Added the auto position calculator using [PositionCalculator](https://github.com/tlindig/position-calculator) to be able to position the menu on top if the element is at the bottom of the page.
 
-    Added Time Selector.
+-Added Time Selector.
 
 Example:
 
