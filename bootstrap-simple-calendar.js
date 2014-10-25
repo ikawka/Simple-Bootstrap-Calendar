@@ -69,11 +69,11 @@ http://stackoverflow.com/a/19797577
 
     function Calendar(month, year) {
         this.month = (isNaN(month) || month == null) ? cal_current_date.getMonth() : month;
-        if(settings.yearRange != false){
-            this.year = settings.yearRange.split(':')[0];
-        }else{
-            this.year = (isNaN(year) || year == null) ? cal_current_date.getFullYear() : year;
-        }
+        //if(settings.yearRange != false && isNaN(this.year)){
+        //    this.year = settings.yearRange.split(':')[0];
+        //}else{
+           this.year = (isNaN(year) || year == null) ? cal_current_date.getFullYear() : year;
+        //}
         this.html = '';
     }
 
@@ -89,14 +89,14 @@ http://stackoverflow.com/a/19797577
                 monthLength = 29;
             }
         }
-
+        
         var monthName = setMonthName(this.month);
         var theYear   = setYear(this.year);
 
-        var html = '<table class="table table-condense table-striped table-bordered">'+
-            '<tr><th><a class="simple-calendar-move btn-prev glyphicon glyphicon-chevron-left" href="javascript:;"></a></th><th colspan="5" style="text-align:center; padding: '+((settings.changeMonth !== false) ? '2':'4')+'px;">'+
-                    theYear+ "" + monthName+
-                   '</th><th><a class="simple-calendar-move btn-next glyphicon glyphicon-chevron-right" href="javascript:;"></a></th></tr>'+
+        var html = '<table class="table table-condense table-striped table-bordered">' +
+                   '<tr><th><a class="simple-calendar-move btn-prev glyphicon glyphicon-chevron-left" href="javascript:;"></a></th><th colspan="5" style="text-align:center; padding: ' + ((settings.changeMonth !== false) ? '2':'4') + 'px;">' +
+                    theYear + ' ' + monthName +
+                   '</th><th><a class="simple-calendar-move btn-next glyphicon glyphicon-chevron-right" href="javascript:;"></a></th></tr>' +
                    '<tr class="calendar-header">';
         for (var i = 0; i <= 6; i++) {
             html += '<td class="calendar-header-day">';
@@ -207,8 +207,9 @@ http://stackoverflow.com/a/19797577
 
     function renderCalendar() {
         var thisMonth = cal_current_date.getMonth();
-        var thisYear = cal_current_date.getFullYear();
-        var cal = new Calendar(thisMonth, thisYear);
+        var thisYear  = cal_current_date.getFullYear();
+        var cal       = new Calendar(thisMonth, thisYear);
+        
         cal.generateHTML();
 
         var calendar = $(cal.getHTML());
@@ -222,12 +223,12 @@ http://stackoverflow.com/a/19797577
 
         calendar.find('select.simple-calendar-month').change(function(){
             var month = $(this).val();
-            var year  = calendar.find('select.simple-calendar-year').val();
+            var year  = $('[data-id="'+calendarId+'"]').find('.simple-calendar-year').val();
             jumpTo(month, year);
         });
 
         calendar.find('select.simple-calendar-year').change(function(){
-            calendar.find('select.simple-calendar-month').change();
+            $('[data-id="'+calendarId+'"]').find('.simple-calendar-month').change();
         });
         
         calendar.find('button.btn-calendar-ok').click(function(){
@@ -280,7 +281,6 @@ http://stackoverflow.com/a/19797577
                 '<div class="dropdown simple-calendar" data-id="'+id+'">' +
                 '<button class="btn ' + settings.bsBtnClass + ' dropdown-toggle" type="button" data-toggle="dropdown"><div class="selected-text">' + settings.defaultText + '</div> <span class="caret"></span></button>' +
                 '<div class="dropdown-menu" role="menu" style="padding: 0" id="meals-calendar-container"></div>' +
-
                 '</div>').on({
                 "shown.bs.dropdown": function () {
                     this.closable = true;
@@ -389,12 +389,17 @@ http://stackoverflow.com/a/19797577
                     return;
                 }
                 
-                cal_current_date = new Date(Date.parse(theValue));
+                theValue = theValue.split("/");
+
+                cal_current_date = new Date();
+                cal_current_date.setMonth(theValue[0]-1);
+                cal_current_date.setDate(theValue[1]);
+                cal_current_date.setFullYear(theValue[2]);
                 var temp = cal_current_date.toISOString();
                 theSelectedDate = dateToYmd(temp);
                 
                 if ($.format) {
-                    theValue = $.format.date(new Date(Date.parse(theValue)).toISOString(), settings.dateFormat);
+                    theValue = $.format.date(temp, settings.dateFormat);
                 }
                 
                 $('[data-id="'+calendarId+'"]').find('.selected-text').text(theValue);
