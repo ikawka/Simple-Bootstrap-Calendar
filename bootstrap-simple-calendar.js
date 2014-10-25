@@ -389,12 +389,12 @@ http://stackoverflow.com/a/19797577
                     return;
                 }
                 
-                theValue = theValue.split("/");
+                var theValue_ = theValue.split("/");
 
                 cal_current_date = new Date();
-                cal_current_date.setMonth(theValue[0]-1);
-                cal_current_date.setDate(theValue[1]);
-                cal_current_date.setFullYear(theValue[2]);
+                cal_current_date.setMonth(theValue_[0]-1);
+                cal_current_date.setDate(theValue_[1]);
+                cal_current_date.setFullYear(theValue_[2]);
                 var temp = cal_current_date.toISOString();
                 theSelectedDate = dateToYmd(temp);
                 
