@@ -388,15 +388,15 @@ http://stackoverflow.com/a/19797577
                     $('[data-id="'+calendarId+'"]').find('.dropdown-menu').empty().append(renderCalendar());
                     return;
                 }
-                
-                var theValue_ = theValue.split("/");
-
+                var tmpDate = new Date(theValue);
                 cal_current_date = new Date();
-                cal_current_date.setMonth(theValue_[0]-1);
-                cal_current_date.setDate(theValue_[1]);
-                cal_current_date.setFullYear(theValue_[2]);
+                cal_current_date.setDate(tmpDate.getDate());
+                cal_current_date.setMonth(tmpDate.getMonth());
+                cal_current_date.setFullYear(tmpDate.getFullYear());
+                
                 var temp = cal_current_date.toISOString();
-                theSelectedDate = dateToYmd(temp);
+               
+                theSelectedDate = dateToYmd(temp).replace(/\//g, "-");
                 
                 if ($.format) {
                     theValue = $.format.date(temp, settings.dateFormat);
